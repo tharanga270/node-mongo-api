@@ -7,6 +7,7 @@ const port = process.env.SERVER_PORT || 3000;
 
 //==============================================
 const customerRoute = require('./route/CustomerRoute');
+const userRoute = require('./route/UserRoute');
 //==============================================
 
 const app = express();
@@ -24,4 +25,5 @@ mongoose.connect('mongodb://127.0.0.1:27017/customer_crud').then(() => {
 
 //==============
 app.use('/api/v1/customers', customerRoute);
+app.use('/api/v1/users', userRoute);
 //==============
