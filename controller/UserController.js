@@ -46,11 +46,14 @@ const login = async (req, resp) => {
               return resp.status(500).json(err);
             }
             if (result) {
+              const expiresIn = 3600;
               const token = jsonWebToken.sign(
                 { username: selectedUser.username },
-                process.env.SECRET_KEY
+                process.env.SECRET_KEY,
+                { expiresIn }
               );
-              return resp.status(200).json({ token: token });
+              resp.setHeader('Authorization', `Bearer ${token}`);
+              return resp.status(200).json({ message: 'check the headers' });
             } else {
               return resp
                 .status(401)
